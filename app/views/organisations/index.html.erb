@@ -1,0 +1,11 @@
+<h1><u>Adnat</u></h1>
+<span>Logged in as </span><b><%= @user.name %></b>
+<%= link_to "Log Out", logout_path, method: :delete %><br>
+<p>You aren't a member of any organisation. Join an existing one or create a new one</p><br>
+<h2>Organisations</h2>
+<ul><% @organisations.each do |org| %></ul>
+  <li><%= org.name %>&nbsp<%= link_to "Edit", root_path %>&nbsp<%= link_to "Join", organisation_path(org) %></li>
+   <% end %>
+<h2>Create organisation</h2>
+
+  

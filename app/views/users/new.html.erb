@@ -1,15 +1,25 @@
 <h1><u>Adnat</u></h1>
 <h2>Sign up</h2>
 <%= form_for @user do |f| %>
+  <div>
   <%= f.label 'Name: '%>
   <%= f.text_field :name %><br>
+  </div><br>
+  <div>
   <%= f.label 'Email: '%>
   <%= f.email_field :email %><br>
+  </div><br>
+  <div>
   <%= f.label 'Password'%><br>
   <%= f.label '(6 characters minimum)'%><br>
   <%= f.password_field :password %><br>
+  </div><br>
+  <div>
   <%= f.label 'Password confirmation '%><br>
   <%= f.password_field :password_confirmation %><br>
-  <button type="submit" class="btn btn-danger">Sign up</button>
-<% end %>
+  </div><br>
+  <button type="submit">Sign up</button>
+<% end %><br>
 <%= link_to "Log In", login_path %><br>
+
+

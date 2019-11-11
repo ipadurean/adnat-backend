@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-    include ApplicationHelper
+  
+  def index
+    @users = User.all
+  end
   
   def new
     @user = User.new
@@ -10,10 +13,10 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to organisations_path
     else
       flash[:message] = @user.errors.full_messages
-      redirect_to new_user_path
+      redirect_to root_path
     end
   end
   
@@ -40,6 +43,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:organisation_id,:name, :password, :password_confirmation, :email)
+    params.require(:user).permit(:name, :password, :password_confirmation, :email)
   end
 end
