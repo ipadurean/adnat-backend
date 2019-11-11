@@ -8,21 +8,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    name = params[:name]
-    password = params[:password]
-    user = User.find_by(name: name)
-    if user && user.authenticate(password)
+    user = User.find_by_email(params[:email])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to organisations_path
     else
-      flash[:message]
+      flash[:message] = "Incorrect email or password, please try again!"
       redirect_to login_path
     end
   end
 
   def destroy
-    session.delete(:user_id)
-    session.delete(:order_id)
-    redirect_to root_path
+    session[:user_id] = nil
+    redirect_to root_path, notice: "Logged out!"
   end
 end
