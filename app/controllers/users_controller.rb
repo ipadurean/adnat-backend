@@ -28,11 +28,17 @@ class UsersController < ApplicationController
     find_user
     if @user.update(user_params)
       flash[:message] = "Your account has been successfully updated."
-      redirect_to @user
+      redirect_to organisations_path
     else
       flash[:errors] = @user.errors.full_messages
       render :edit
     end
+  end
+
+  def switch_organisation
+    @user = current_user
+    @user.update_attributes(organisation_id: params[:organisation_id])
+    redirect_to organisations_path
   end
   
   
