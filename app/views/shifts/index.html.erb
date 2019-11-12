@@ -1,5 +1,5 @@
 <h1><u><%= link_to 'Adnat', organisations_path %></u></h1>
-<span>Logged in as </span><%= link_to 'Log Out', logout_path, method: :delete %><br>
+<span>Logged in as <b><%= @user.name %></b>&nbsp&nbsp</span><%= link_to 'Log Out', logout_path, method: :delete %><br>
 <h2><%=  %></h2>
 <h4>Shifts</h4>
   <table style="width:100%">
