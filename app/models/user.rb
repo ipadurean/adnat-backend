@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
-  # validates :password_digest, length: { minimum: 6 }
+  validates_presence_of :name
+  validates_presence_of :email
+  validates_presence_of :password
   
 end

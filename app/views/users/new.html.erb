@@ -12,7 +12,7 @@
   <div>
   <%= f.label 'Password'%><br>
   <%= f.label '(6 characters minimum)'%><br>
-  <%= f.password_field :password %><br>
+  <%= f.password_field :password, minlength: 6 %><br>
   </div><br>
   <div>
   <%= f.label 'Password confirmation '%><br>

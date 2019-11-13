@@ -1,8 +1,8 @@
 <h1><u><%= link_to 'Adnat', organisations_path %></u></h1>
 <span>Logged in as <b><%= @user.name %></b>&nbsp&nbsp</span><%= link_to 'Log Out', logout_path, method: :delete %><br>
-<h2><%=  %></h2>
+<h2><%= Organisation.find_by_id(@user.organisation_id).name %></h2>
 <h4>Shifts</h4>
-  <table style="width:100%">
+  <table style="width:90%">
   <tr>
     <th>Employee name</th>
     <th>Shift date</th> 
@@ -14,12 +14,23 @@
   </tr>
   <% @shifts.each do |shift| %>
     <tr>
-       <td></td>
-       <td></td>
-       <td><%= shift.start %></td>
-       <td><%= shift.finish %></td>
+       <td><%= User.find_by_id(shift.user_id).name %></td>
+       <td><%= shift_date(shift) %></td>
+       <td><%= shift_start(shift) %></td>
+       <td><%= shift_finish(shift) %></td>
        <td><%= shift.break_length %></td>
-       <td></td>
-       <td></td>
-       </tr>
+       <td><%= hours_worked(shift) %></td>
+       <td>$<%= shift_cost(@user, shift) %></td>
+    </tr>
     <% end %>
+    <tr>
+      <td><%= @user.name %></td>
+      <%= form_tag "/shifts" do %>
+        <%= hidden_field_tag 'user_id', @user.id %>
+        <td><%= text_field_tag :date %></td>
+         <td><%= text_field_tag :start_time %></td>
+         <td><%= text_field_tag :finish_time %></td>
+        <td><%= text_field_tag :break_length %></td>
+         <td><button type="submit">Create Shift</button></td> 
+      <% end %>
+    </tr>

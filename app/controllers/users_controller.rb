@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def switch_organisation
     @user = current_user
-    @user.update_attributes(organisation_id: params[:organisation_id])
+    @user.update(organisation_id: params[:organisation_id])
     redirect_to organisations_path
   end
   
