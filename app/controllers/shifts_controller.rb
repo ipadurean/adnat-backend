@@ -12,14 +12,14 @@ class ShiftsController < ApplicationController
   def create
     @shift = Shift.new
     @shift[:user_id] = params[:user_id]
-    date_str = params[:date].split("/").join("-")
+    arr = params[:date].split(/\D/)
+    date_str = [arr[1], arr[0], arr[2]].join("-")
     start_str = params[:start_time]
     finish_str = params[:finish_time]
     @shift[:start] = DateTime.strptime(date_str + " " + start_str, '%d-%m-%Y %I:%M %p')
     @shift[:finish] = DateTime.strptime(date_str + " " + finish_str, '%d-%m-%Y %I:%M %p')
     @shift[:break_length] = params[:break_length]
     @shift.save
-
     redirect_to shifts_path
   end
 

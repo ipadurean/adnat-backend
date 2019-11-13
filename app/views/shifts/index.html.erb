@@ -12,7 +12,7 @@
     <th>Hours worked</th>
     <th>Shift cost</th>
   </tr>
-  <% @shifts.each do |shift| %>
+  <% @shifts.reverse.each do |shift| %>
     <tr>
        <td><%= User.find_by_id(shift.user_id).name %></td>
        <td><%= shift_date(shift) %></td>
@@ -23,14 +23,18 @@
        <td>$<%= shift_cost(@user, shift) %></td>
     </tr>
     <% end %>
-    <tr>
-      <td><%= @user.name %></td>
-      <%= form_tag "/shifts" do %>
-        <%= hidden_field_tag 'user_id', @user.id %>
-        <td><%= text_field_tag :date %></td>
-         <td><%= text_field_tag :start_time %></td>
-         <td><%= text_field_tag :finish_time %></td>
-        <td><%= text_field_tag :break_length %></td>
-         <td><button type="submit">Create Shift</button></td> 
+    </table>
+      
+      <%= form_tag '/shifts/create' do %>
+        <table style="width:90%">
+          <tr><td><%= @user.name %></td>
+                <%= hidden_field_tag 'user_id', @user.id %>
+            <td><%= text_field_tag :date %></td>
+            <td><%= text_field_tag :start_time %></td>
+            <td><%= text_field_tag :finish_time %></td>
+            <td><%= text_field_tag :break_length %></td>
+            <td><%= submit_tag 'Create Shift' %></td> 
+          </tr>
+        </table>
       <% end %>
-    </tr>
+   

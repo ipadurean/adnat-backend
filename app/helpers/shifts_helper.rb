@@ -1,4 +1,4 @@
-require 'pry'
+
 module ShiftsHelper
 
   def shift_date(shift)

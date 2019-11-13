@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
   def switch_organisation
     @user = current_user
+    @user.shifts.destroy_all
     @user.update(organisation_id: params[:organisation_id])
     redirect_to organisations_path
   end
