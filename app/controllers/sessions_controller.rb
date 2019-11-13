@@ -10,8 +10,12 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to organisations_path
+      if params[:remember_me]
+        cookies.permanent[:user_id] = user.id
+      else
+        cookies[:user_id] = user.id
+      end
+      redirect_to organisations_path, :notice => 'Logged in'
     else
       flash[:message] = "Incorrect email or password, please try again!"
       redirect_to login_path
@@ -19,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies.delete(:user_id)
     redirect_to root_path, notice: "Logged out!"
   end
 end

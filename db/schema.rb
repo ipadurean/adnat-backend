@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_200351) do
 
   create_table "organisations", force: :cascade do |t|
     t.string "name"
-    t.integer "hourly_rate"
+    t.float "hourly_rate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

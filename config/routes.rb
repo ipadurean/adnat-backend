@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  root 'users#new'
+  root 'sessions#new'
   resources :shifts
   resources :users
   resources :organisations
+  resources :password_resets
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'

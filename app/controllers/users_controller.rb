@@ -12,11 +12,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.valid?
       @user.save
-      session[:user_id] = @user.id
+      cookies[:user_id] = @user.id
       redirect_to organisations_path
     else
-      flash[:message] = @user.errors.full_messages
-      redirect_to root_path
+      redirect_to new_user_path
     end
   end
   
@@ -30,7 +29,7 @@ class UsersController < ApplicationController
       flash[:message] = "Your account has been successfully updated."
       redirect_to organisations_path
     else
-      flash[:errors] = @user.errors.full_messages
+      
       render :edit
     end
   end

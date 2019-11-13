@@ -11,8 +11,10 @@ class OrganisationsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @organisation = Organisation.new(organisation_params)
     @organisation.save
+    @user.update(organisation_id: @organisation.id)
     redirect_to organisations_path
   end
 
@@ -28,8 +30,10 @@ class OrganisationsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     @organisation = Organisation.find(params[:id])
     @organisation.destroy
+    @user.update(organisation_id: nil)
     redirect_to organisations_path
   end
 
