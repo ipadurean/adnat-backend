@@ -30,5 +30,18 @@ module ShiftsHelper
     Organisation.find_by_id(user.organisation_id).hourly_rate * hours_worked(shift)
   end
 
+  def filter_shifts(current_user)
+    shifts = []
+      users = @users.select{|user| user.organisation_id == current_user.organisation_id}
+      @shifts.each do |shift|
+              users.each do |user|
+                if user.id == shift.user_id
+                  shifts.push(shift)
+                end
+              end
+            end
+          return shifts.reverse
+   end
+
 
 end

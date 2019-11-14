@@ -14,7 +14,7 @@
     <th>Hours worked</th>
     <th>Shift cost</th>
   </tr>
-  <% @shifts.reverse.each do |shift| %>
+  <% filter_shifts(@user).each do |shift| %>
     <tr style="width:90%">
        <td><%= User.find_by_id(shift.user_id).name %></td>
        <td><%= shift_date(shift) %></td>
