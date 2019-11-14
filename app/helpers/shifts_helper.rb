@@ -13,10 +13,16 @@ module ShiftsHelper
     shift.finish.strftime("%I:%M %p")
   end
 
+  
+
   def hours_worked(shift)
     start_time_minutes = shift.start.strftime("%H").to_i * 60 + shift.start.strftime("%M").to_i
     end_time_minutes = shift.finish.strftime("%H").to_i * 60 + shift.finish.strftime("%M").to_i
-    total = end_time_minutes - start_time_minutes - shift.break_length
+      if start_time_minutes > end_time_minutes
+        total = 1440 - start_time_minutes + end_time_minutes - shift.break_length
+      else
+        total = end_time_minutes - start_time_minutes - shift.break_length
+      end
     return (total/60.to_f).round(2)
   end
 

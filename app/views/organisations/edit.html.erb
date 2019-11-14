@@ -1,17 +1,19 @@
-<h1><u><%= link_to 'Adnat', organisations_path %></u></h1>
-<span>Logged in as </span><b><%= @user.name %></b>
-<h2>Edit Organisation<h2>
-<%= form_for @organisation do |f|  %>
-  <div>
-  <%= f.label 'Name: '%>
-  <%= f.text_field :name %><br>
-  </div><br>
-  <div>
-  <%= f.label 'Hourly rate: '%>
-  <%= f.text_field :hourly_rate %><br>
-  </div><br>  
-  <button type="submit">Update</button> 
-<% end %>
-<%= form_tag organisation_path(@organisation.id), method: "delete" do %>
-  <%= submit_tag "Delete" %>
-<% end %>
+<div class="organisations">
+    <h1><u><%= link_to 'Adnat', organisations_path %></u></h1>
+    <span>Logged in as </span><b><%= @user.name %></b>
+    <h2>Edit Organisation<h2>
+    <%= form_for @organisation do |f|  %>
+      <div>
+          <%= f.label 'Name: '%>
+          <%= f.text_field :name, required: true %><br>
+      </div><br>
+      <div>
+          <%= f.label 'Hourly rate: '%>
+          <%= f.text_field :hourly_rate, required: true %><br>
+      </div><br>  
+      <button type="submit">Update</button> 
+    <% end %>
+    <%= form_tag organisation_path(@organisation.id), method: "delete" do %>
+      <%= submit_tag "Delete" %>
+    <% end %>
+</div>

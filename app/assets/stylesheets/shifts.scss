@@ -1,3 +1,17 @@
 // Place all the styles related to the shifts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+table, td, tr, th {
+  border: 1px solid rgb(158, 156, 156);
+}
+td {
+  text-align: center;
+  padding: 10px;
+}
+table {
+  border-collapse: collapse;
+}
+
+.shifts{
+  padding: 0 100px 50px;
+}
