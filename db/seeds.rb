@@ -1,10 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
 Organisation.create({name:"Bob's Burgers", hourly_rate:10})
 Organisation.create({name:"Moe's Tavern", hourly_rate:11})
 Organisation.create({name:"Sally's Sandwiches", hourly_rate:12})
+User.create({organisation_id:1, name:"Greg Accardi", email:"greg@yahoo.com", password:"accardi", password_confirmation:"accardi" })
+User.create({organisation_id:2, name:"John Leverett", email:"john@gmail.com", password:"leverett", password_confirmation: "leverett"})
+Shift.create({user_id:2, start:"2019-11-12 18:30:00 -0000 ", finish:"2019-11-13 03:00:00 -0000 ", break_length:45})
+Shift.create({user_id:1, start:"2019-11-12 18:30:00 -0000 ", finish:"2019-11-13 01:00:00 -0000 ", break_length:30})
+Shift.create({user_id:1, start:"2019-11-13 08:00:00 -0000 ", finish:"2019-11-13 18:00:00 -0000 ", break_length:60})
+Shift.create({user_id:2, start:"2019-11-14 09:00:00 -0000 ", finish:"2019-11-14 18:00:00 -0000  ", break_length:45})
+Shift.create({user_id:1, start:"2019-11-14 09:00:00 -0000 ", finish:"2019-11-14 17:00:00 -0000 ", break_length:30})
