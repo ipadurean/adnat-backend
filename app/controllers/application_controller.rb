@@ -14,11 +14,13 @@ class ApplicationController < ActionController::Base
       end  
 
       def validate_time(time)
-          arr = time.split(/\D/)
-          arr[0]&&a = arr[0].to_i
-          arr[1]&&b = arr[1].to_i
-          c = time[-2..-1].downcase
-           if (a<13 && b<60 && c == "am" || c == "pm") == false
+          arr = time.split(/\D/)   #isolate numbers
+          arr[0] && a = arr[0].to_i  #convert into integer
+          arr[1] && b = arr[1].to_i  
+          c = arr[0]+":"+arr[1]+"AM" #create the desired time format
+          d = arr[0]+":"+arr[1]+"PM" 
+         
+           if (a>0 && a<13 && b<60 && time == c || time == d) == false #validate the time format
             flash[:message] = "Time should have format HH:MM AM(or PM)"
             return false
            else
@@ -29,11 +31,13 @@ class ApplicationController < ActionController::Base
    
 
     def validate_date(date)
-      arr = date.split(/\D/)
-      arr[0]&&a = arr[0].to_i
+      arr = date.split(/\D/) #isolate numbers
+      arr[0]&&a = arr[0].to_i  #convert into integer
       arr[1]&&b = arr[1].to_i
       arr[2]&&c = arr[2].to_i
-          if (a<13 && b<=Time.days_in_month(a, c)) == false
+      d = arr[0]+"/"+arr[1]+"/"+arr[2] #create the desired date format
+
+          if (a>0 && a<13 && b>0 && b<=Time.days_in_month(a, c) && date == d) == false #validate the date format
             flash[:message] = "Date should have format MM/DD/YYYY"
             return false
           elsif (c == Time.zone.now.year) == false
