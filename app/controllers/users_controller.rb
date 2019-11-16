@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #joining or leaving an organisation by current user
   def switch_organisation
     @user = current_user
     @user.shifts.destroy_all

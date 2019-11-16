@@ -1,7 +1,11 @@
 <div class="shifts">
 <h1><u><%= link_to 'Adnat', organisations_path %></u></h1>
+
+#displaying current user name and current organisation name
 <span>Logged in as <b><%= @user.name %></b>&nbsp&nbsp</span><%= link_to 'Log Out', logout_path, method: :delete %><br>
 <h2><%= Organisation.find_by_id(@user.organisation_id).name %></h2>
+
+#displaying total shifts belonging to current organisation and the form for creating shift
 <h4>Shifts</h4>
 <%= form_tag '/shifts/create' do %>
   <table style="width:90%">
@@ -25,6 +29,7 @@
        <td>$<%= shift_cost(@user, shift) %></td>
     </tr>
     <% end %>
+
           <tr><td><%= @user.name %></td>
                 <%= hidden_field_tag 'user_id', @user.id %>
             <td><%= text_field_tag :date,nil, required: true %></td>

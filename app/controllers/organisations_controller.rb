@@ -10,6 +10,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.find(params[:id])
   end
 
+  #create new organisation and automatically add current user to it
   def create
     @user = current_user
     @organisation = Organisation.new(organisation_params)
@@ -29,11 +30,15 @@ class OrganisationsController < ApplicationController
     redirect_to organisations_path
   end
 
+  # delete organisation and reset users to default state, not belonging to any organisation
   def destroy
     @user = current_user
     @organisation = Organisation.find(params[:id])
-    @organisation.destroy
-    @user.update(organisation_id: nil)
+      @organisation.destroy
+      users = User.all.select{|user| user.organisation_id == params[:id].to_i}
+      users.each do |user|
+          user.update(organisation_id: nil)  
+      end
     redirect_to organisations_path
   end
 

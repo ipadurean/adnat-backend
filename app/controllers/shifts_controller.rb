@@ -11,8 +11,11 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    
+  
+    # first validate user input 
     if validate_date(params[:date]) && validate_time(params[:start_time]) && validate_time(params[:finish_time])
+  
+    # second format params to match database
       @shift = Shift.new
       @shift[:user_id] = params[:user_id]
       arr = params[:date].split(/\D/)
@@ -22,6 +25,8 @@ class ShiftsController < ApplicationController
       @shift[:start] = DateTime.strptime(date_str + " " + start_str, '%d-%m-%Y %I:%M %p')
       @shift[:finish] = DateTime.strptime(date_str + " " + finish_str, '%d-%m-%Y %I:%M %p')
       @shift[:break_length] = params[:break_length]
+
+  # persist data
       @shift.save
     end
     redirect_to shifts_path

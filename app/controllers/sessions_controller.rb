@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       if params[:remember_me]
-        cookies.permanent[:user_id] = user.id
+        cookies.permanent[:user_id] = user.id  #store user id in cookie permanently if remember me is selected
       else
         cookies[:user_id] = user.id
       end

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
  
-   
+  #extract current user from cookie 
       def current_user
         if cookies[:user_id]
           @current_user ||= User.find(cookies[:user_id])
@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
         end
       end
 
+#check if user is logged in. Returns boolean
       def logged_in?
         !!current_user
       end  
